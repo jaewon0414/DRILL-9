@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.idea/
+.vscode/
+
+# 수업 실습 폴더는 과제 저장소에 올리지 않음
+LEC10_HandlingInputs/
