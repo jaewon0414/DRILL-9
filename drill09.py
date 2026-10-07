@@ -40,16 +40,22 @@ running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 dir_x, dir_y = 0, 0
+face = 1  # 바라보는 방향: 1 오른쪽, -1 왼쪽
 
 while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100, 100, 100, x, y)
+    if face > 0:
+        character.clip_draw(frame * 100, 100, 100, 100, x, y)
+    else:
+        character.clip_draw(frame * 100, 0, 100, 100, x, y)
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
     x += dir_x * 5
     y += dir_y * 5
+    if dir_x != 0:
+        face = dir_x
     delay(0.05)
 
 close_canvas()
