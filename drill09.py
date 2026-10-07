@@ -8,19 +8,30 @@ character = load_image('animation_sheet.png')
 
 
 def handle_events():
-    global running
+    global running, dir_x
 
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
             running = False
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            running = False
+        elif event.type == SDL_KEYDOWN:
+            if event.key == SDLK_RIGHT:
+                dir_x += 1
+            elif event.key == SDLK_LEFT:
+                dir_x -= 1
+            elif event.key == SDLK_ESCAPE:
+                running = False
+        elif event.type == SDL_KEYUP:
+            if event.key == SDLK_RIGHT:
+                dir_x -= 1
+            elif event.key == SDLK_LEFT:
+                dir_x += 1
 
 
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
+dir_x = 0
 
 while running:
     clear_canvas()
@@ -29,6 +40,7 @@ while running:
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
+    x += dir_x * 5
     delay(0.05)
 
 close_canvas()
