@@ -2,6 +2,7 @@ from pico2d import *
 
 
 TUK_WIDTH, TUK_HEIGHT = 800, 600
+HALF_W, HALF_H = 35, 45  # 소년 중심에서 좌우, 위아래 끝까지 거리
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 tuk_ground = load_image('TUK_GROUND.png')
 character = load_image('animation_sheet.png')
@@ -61,6 +62,8 @@ while running:
     frame = (frame + 1) % 8
     x += dir_x * 5
     y += dir_y * 5
+    x = clamp(HALF_W, x, TUK_WIDTH - HALF_W)
+    y = clamp(HALF_H, y, TUK_HEIGHT - HALF_H)
     if dir_x != 0:
         face = dir_x
     delay(0.05)
